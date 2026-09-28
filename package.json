@@ -1,0 +1,19 @@
+{
+  "name": "accents-for-ui5",
+  "version": "0.1.0",
+  "description": "An open design framework for business apps on OpenUI5: a shell, 16 page patterns and 70 elements for planning, analytics, transactional forms, reporting and workflow, with rules for colour, motion, translation, accessibility, data and AI.",
+  "license": "Apache-2.0",
+  "author": "JP Galido",
+  "homepage": "https://github.com/jpgalido-txm/accents-for-ui5",
+  "repository": { "type": "git", "url": "git+https://github.com/jpgalido-txm/accents-for-ui5.git" },
+  "bugs": { "url": "https://github.com/jpgalido-txm/accents-for-ui5/issues" },
+  "keywords": ["openui5", "ui5", "design-system", "enterprise", "business-apps", "accessibility", "i18n", "components"],
+  "files": ["src/accents/", "docs/", "LICENSE", "NOTICE", "README.md", "CHANGELOG.md", "PROVENANCE.md", "SECURITY.md"],
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "serve": "python3 tools/serve.py",
+    "lint": "node tools/lint.mjs",
+    "check": "node tools/check.mjs",
+    "audit": "node tools/audit-all.mjs"
+  }
+}
