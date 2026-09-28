@@ -1,0 +1,15 @@
+{
+  "name": "accents-for-ui5",
+  "description": "The Accents for UI5 design framework for OpenUI5 business apps: one plugin with its skill and MCP server.",
+  "owner": {
+    "name": "JP Galido"
+  },
+  "plugins": [
+    {
+      "name": "accents-for-ui5",
+      "source": "./",
+      "description": "Accents for UI5: the skill and MCP server for building business apps with the Accents design framework on OpenUI5.",
+      "version": "0.1.0"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "accents": {
+      "command": "node",
+      "args": [
+        "mcp/server.mjs"
+      ]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+# Accents for UI5: a tag such as v0.1.0 runs the full audit, builds the claude.ai skill package and
+# publishes a GitHub release with it. The release is only as public as the repository.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Version in the tag matches brand.js and plugin.json
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          grep -q "version: \"$tag\"" src/accents/brand.js
+          grep -q "\"version\": \"$tag\"" .claude-plugin/plugin.json
+      - run: node tools/lint.mjs
+      - run: node mcp/test.mjs
+      - run: npx --yes @anthropic-ai/claude-code plugin validate --strict .
+      - name: Serve the gallery
+        run: |
+          python3 tools/serve.py 8811 &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:8811/gallery/index.html >/dev/null && break; sleep 1; done
+      - name: Full audit (390 light, 1440 dark, 1920 high contrast, German, Arabic)
+        run: node tools/audit-all.mjs
+      - name: Build the claude.ai skill package
+        run: node tools/package-skill.mjs
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes=$(awk "/^## ${GITHUB_REF_NAME#v}/{f=1;next} /^## /{f=0} f" CHANGELOG.md)
+          gh release create "$GITHUB_REF_NAME" dist/accents-for-ui5-skill.zip /tmp/accents-audit.json \
+            --title "Accents for UI5 $GITHUB_REF_NAME" --notes "$notes"

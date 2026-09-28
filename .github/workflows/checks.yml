@@ -1,0 +1,38 @@
+# Accents for UI5: checks on every push and pull request.
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Rules a script can check
+        run: node tools/lint.mjs
+      - name: MCP server
+        run: node mcp/test.mjs
+      - name: Plugin and marketplace manifests
+        run: npx --yes @anthropic-ai/claude-code plugin validate --strict .
+      - name: Serve the gallery
+        run: |
+          python3 tools/serve.py 8811 &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:8811/gallery/index.html >/dev/null && break; sleep 1; done
+      - name: Render and audit every entry (1440, light)
+        run: node tools/audit-all.mjs --quick
+      - name: Keep the audit details
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: audit-quick
+          path: /tmp/accents-audit.json

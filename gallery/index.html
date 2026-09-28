@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Accents for UI5 · Gallery</title>
+	<!-- 0. Collect errors from the very start, for the audit. -->
+	<script>
+		window.__accErrors = [];
+		(function () {
+			var push = function (m) { window.__accErrors.push(String(m).slice(0, 300)); };
+			window.addEventListener("error", function (e) { push(e.message); });
+			window.addEventListener("unhandledrejection", function (e) { push(e.reason && e.reason.message || e.reason); });
+			var original = console.error;
+			console.error = function () { push(Array.prototype.join.call(arguments, " ")); return original.apply(console, arguments); };
+		})();
+	</script>
+	<!-- 1. Theme before first paint. The bootstrap tag below deliberately has no theme attribute. -->
+	<script src="../src/accents/boot.js"></script>
+	<link rel="stylesheet" href="../src/accents/accents.css">
+	<link rel="stylesheet" href="gallery.css">
+	<!-- 2. OpenUI5 (Apache-2.0), pinned. Only libraries that ship in OpenUI5. -->
+	<script id="sap-ui-bootstrap"
+		src="https://sdk.openui5.org/1.148.9/resources/sap-ui-core.js"
+		data-sap-ui-compat-version="edge"
+		data-sap-ui-async="true"
+		data-sap-ui-xx-wait-for-theme="init"
+		data-sap-ui-libs="sap.m,sap.f,sap.tnt,sap.ui.layout,sap.uxap,sap.ui.table"
+		data-sap-ui-resource-roots='{ "accents": "../src/accents/", "gallery": "./" }'
+		data-sap-ui-on-init="module:gallery/Gallery"></script>
+</head>
+<body class="sapUiBody" id="content"></body>
+</html>

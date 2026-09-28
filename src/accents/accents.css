@@ -1,0 +1,150 @@
+/*!
+ * Accents for UI5 — stylesheet.
+ * Copyright 2026 JP Galido. Licensed under the Apache License, Version 2.0.
+ *
+ * Rules for this file: no literal colours except the AI surface, which is Accents' own brand and is
+ * meant to stay recognisable in every theme. Everything else reads a theme variable (--sap*) or a
+ * value Accents derives from one (--acc-*, published by core/Tokens.js).
+ */
+
+/* ---------- Font: Inter (SIL Open Font Licence), aliased under the names the theme asks for ---------- */
+@font-face { font-family: "Accents Sans"; font-weight: 300; font-display: swap; src: url("fonts/inter-latin-300.woff2") format("woff2"); }
+@font-face { font-family: "Accents Sans"; font-weight: 400; font-display: swap; src: url("fonts/inter-latin-400.woff2") format("woff2"); }
+@font-face { font-family: "Accents Sans"; font-weight: 600; font-display: swap; src: url("fonts/inter-latin-600.woff2") format("woff2"); }
+@font-face { font-family: "Accents Sans"; font-weight: 700; font-display: swap; src: url("fonts/inter-latin-700.woff2") format("woff2"); }
+@font-face { font-family: "Accents Sans"; font-weight: 900; font-display: swap; src: url("fonts/inter-latin-900.woff2") format("woff2"); }
+/* The theme picks weight by family name, so each weight also gets a family of its own. */
+@font-face { font-family: "Accents Sans Light"; font-display: swap; src: url("fonts/inter-latin-300.woff2") format("woff2"); }
+@font-face { font-family: "Accents Sans Semibold"; font-display: swap; src: url("fonts/inter-latin-600.woff2") format("woff2"); }
+@font-face { font-family: "Accents Sans Bold"; font-display: swap; src: url("fonts/inter-latin-700.woff2") format("woff2"); }
+@font-face { font-family: "Accents Sans Black"; font-display: swap; src: url("fonts/inter-latin-900.woff2") format("woff2"); }
+
+/* html:root outranks the theme's :root, whichever loads last. */
+html:root {
+	--acc-font: "Accents Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+	--sapFontFamily: var(--acc-font);
+	--sapFontLightFamily: "Accents Sans Light", var(--acc-font);
+	--sapFontSemiboldFamily: "Accents Sans Semibold", var(--acc-font);
+	--sapFontSemiboldDuplexFamily: "Accents Sans Semibold", var(--acc-font);
+	--sapFontBoldFamily: "Accents Sans Bold", var(--acc-font);
+	--sapFontHeaderFamily: "Accents Sans Bold", var(--acc-font);
+	--sapFontBlackFamily: "Accents Sans Black", var(--acc-font);
+
+	/* The AI surface: plum. Accents' own colour, the same in every theme, so model output is never
+	   mistaken for system data. Override these three to rebrand. */
+	--acc-ai-ink: #7a2c6e;
+	--acc-ai-edge: #a24b93;
+	--acc-ai-tint: rgba(122, 44, 110, 0.07);
+
+	--acc-motion-enter: 400ms;
+	--acc-motion-hover: 180ms;
+	--acc-motion-flash: 900ms;
+	--acc-gap: 0.75rem;
+}
+html[data-acc-scheme="dark"]:root {
+	--acc-ai-ink: #e7a6dc;
+	--acc-ai-edge: #c77bb9;
+	--acc-ai-tint: rgba(231, 166, 220, 0.10);
+}
+html, body { background-color: var(--sapBackgroundColor); }
+.accTabular { font-variant-numeric: tabular-nums; }
+
+/* ---------- Keyboard-only focus ---------- */
+.accNoMouseRing :focus:not(:focus-visible),
+.accNoMouseRing :focus:not(:focus-visible)::after,
+.accNoMouseRing :focus:not(:focus-visible)::before { outline: none !important; }
+
+/* ---------- Shell ---------- */
+.accShellTitle { font-family: var(--sapFontSemiboldFamily); font-size: var(--sapFontHeader5Size); color: var(--sapShell_TextColor); white-space: nowrap; }
+.accShellMark { height: 1.75rem; width: auto; }
+.accPage { padding: 1rem 1rem 2rem; box-sizing: border-box; }
+@media (min-width: 1024px) { .accPage { padding: 1.5rem 2rem 2.5rem; } }
+.accPageTitle { margin-bottom: 0.25rem; }
+.accPageLead { color: var(--sapContent_LabelColor); margin-bottom: 1rem; max-width: 60rem; }
+.accUserBlock { padding: 1rem; border-bottom: 1px solid var(--sapList_BorderColor); }
+.accUserBlock .sapMText { color: var(--sapContent_LabelColor); }
+.accPopPad { padding: 1rem; }
+
+/* ---------- Bands and cards ---------- */
+.accBand { margin-bottom: 1.5rem; }
+.accBandTitle { margin: 0 0 0.5rem; }
+.accBand .sapFGridContainer { padding: 0; }
+/* The control takes fixed column widths only; Layout.band publishes the active column count and the
+   columns share the band's width. */
+.accBand .sapFGridContainerListUl { grid-template-columns: repeat(var(--acc-cols, 16), minmax(0, 1fr)) !important; }
+.accCardBody { padding: 0 1rem 1rem; box-sizing: border-box; height: 100%; }
+/* Card content is a flex row; the body must take the full width or charts inside get zero width. */
+.accCard .sapFCardContent > .accCardBody { flex: 1 1 auto; width: 100%; min-width: 0; }
+.accCardBody--bare { padding-top: 1rem; }
+.accCardBody > .sapMFlexBox { height: 100%; }
+.accCard.sapFCard { height: 100%; }
+.accPressable.sapFCard { transition: transform var(--acc-motion-hover) ease, box-shadow var(--acc-motion-hover) ease; cursor: pointer; }
+.accPressable.sapFCard:hover { transform: translateY(-2px); box-shadow: var(--sapContent_Shadow1); }
+.sapMText.accSource, .accSource { color: var(--sapContent_LabelColor); font-size: var(--sapFontSmallSize); padding-top: 0.75rem; }
+.accHairline { border-top: 1px solid var(--sapList_BorderColor); }
+
+/* ---------- Parts: view states ---------- */
+.accPartMsg:empty { display: none; }
+.accPartMsg .sapMMsgStrip { margin: 0.5rem 0; }
+
+/* ---------- Figures ---------- */
+.sapMText.accFigure, .accFigure { font-family: var(--sapFontBoldFamily); font-size: 2rem; line-height: 1.15; color: var(--sapTextColor); font-variant-numeric: tabular-nums; }
+.sapMText.accFigure--good, .accFigure--good { color: var(--sapPositiveTextColor); }
+.sapMText.accFigure--bad, .accFigure--bad { color: var(--sapNegativeTextColor); }
+.sapMText.accFigure--warn, .accFigure--warn { color: var(--sapCriticalTextColor); }
+.sapMText.accFigureUnit, .accFigureUnit { font-size: var(--sapFontSize); color: var(--sapContent_LabelColor); margin-inline-start: 0.25rem; }
+.sapMText.accLabel, .accLabel { color: var(--sapContent_LabelColor); font-size: var(--sapFontSmallSize); }
+.accDelta { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.accDelta--good { color: var(--sapPositiveTextColor); }
+.accDelta--bad { color: var(--sapNegativeTextColor); }
+.accDelta--none { color: var(--sapContent_LabelColor); }
+
+/* ---------- Motion ---------- */
+@keyframes accEnter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.accEnter { animation: accEnter var(--acc-motion-enter) cubic-bezier(.2,.7,.3,1) both; }
+@keyframes accFlashGood { from { background-color: var(--acc-good-soft); } to { background-color: transparent; } }
+@keyframes accFlashBad { from { background-color: var(--acc-bad-soft); } to { background-color: transparent; } }
+@keyframes accFlashNeutral { from { background-color: var(--acc-info-soft); } to { background-color: transparent; } }
+.accFlash--good { animation: accFlashGood var(--acc-motion-flash) ease-out; border-radius: 0.25rem; }
+.accFlash--bad { animation: accFlashBad var(--acc-motion-flash) ease-out; border-radius: 0.25rem; }
+.accFlash--none { animation: accFlashNeutral var(--acc-motion-flash) ease-out; border-radius: 0.25rem; }
+@keyframes accPulse { 0% { transform: scale(1); } 40% { transform: scale(1.18); } 100% { transform: scale(1); } }
+.accPulse { display: inline-block; animation: accPulse 500ms ease-out; }
+.accChanged { background-color: var(--acc-info-soft); }
+@media (prefers-reduced-motion: reduce) {
+	.accEnter, .accFlash--good, .accFlash--bad, .accFlash--none, .accPulse { animation: none !important; }
+	.accPressable.sapFCard, .accPressable.sapFCard:hover { transition: none; transform: none; }
+}
+html[data-acc-motion="reduced"] .accEnter,
+html[data-acc-motion="reduced"] .accPulse,
+html[data-acc-motion="reduced"] [class*="accFlash--"] { animation: none !important; }
+
+/* ---------- Charts ---------- */
+/* No minimum height: every chart sets its own, and the audit fails any chart with zero height. Thin in-cell charts need that freedom. */
+.accChart { width: 100%; position: relative; }
+.accChartTable { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* ---------- AI surface ---------- */
+/* Tint and label only: no coloured edge, per the "colour the fact, not the container" rule. */
+.accAi { background: linear-gradient(135deg, var(--acc-ai-tint), transparent 70%), var(--sapGroup_ContentBackground); border-radius: 0.5rem; padding: 0.75rem 1rem; }
+.sapMText.accAiLabel, .accAiLabel { color: var(--acc-ai-ink); font-size: var(--sapFontSmallSize); font-family: var(--sapFontSemiboldFamily); }
+.accAiButton.sapMBtn .sapMBtnIcon, .accAiButton.sapMBtn .sapUiIcon { color: var(--acc-ai-ink) !important; }
+.accChat { display: flex; flex-direction: column; gap: 0.75rem; padding: 1rem; }
+.accTurnUser { align-self: flex-end; max-width: 85%; background: var(--sapList_SelectionBackgroundColor, var(--acc-info-soft)); border-radius: 0.75rem 0.75rem 0.25rem 0.75rem; padding: 0.5rem 0.75rem; }
+.accTurnModel { align-self: stretch; }
+.accTurnModel .sapMText { white-space: pre-wrap; }
+.accChatDock { border-top: 1px solid var(--sapList_BorderColor); padding: 0.75rem 1rem; }
+.accAboutChip { color: var(--sapContent_LabelColor); font-size: var(--sapFontSmallSize); margin-bottom: 0.25rem; }
+
+/* ---------- Grid (key-figure) cell states ---------- */
+.accCell--readonly { color: var(--sapContent_LabelColor); }
+.accCell--actual { font-family: var(--sapFontSemiboldFamily); }
+.accCell--pending { background-color: var(--acc-warn-soft); }
+.accCell--saved { background-color: var(--acc-info-soft); }
+.accCell--na { color: transparent; }
+.accCell--selected { background-color: var(--sapList_SelectionBackgroundColor); }
+
+/* ---------- Range slider: the model's safe range, drawn under the track ---------- */
+.accSafeBand { position: absolute; top: calc(100% + 0.25rem); height: 0.25rem; border-radius: 0.125rem; pointer-events: none; background: var(--sapChart_Good); }
+
+/* ---------- Gallery-only helpers live in gallery/gallery.css ---------- */

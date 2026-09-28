@@ -1,0 +1,30 @@
+Accents for UI5
+Copyright 2026 JP Galido
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Accents is an independent project. It is not affiliated with, sponsored by or endorsed by SAP SE.
+SAP, SAP Fiori and SAPUI5 are trademarks or registered trademarks of SAP SE or its affiliates in
+Germany and in other countries.
+
+------------------------------------------------------------------------------------------------
+Software this product uses
+------------------------------------------------------------------------------------------------
+
+OpenUI5 (loaded at run time from https://sdk.openui5.org; not included in this repository)
+  Copyright SAP SE or an SAP affiliate company and OpenUI5 contributors.
+  Licensed under the Apache License, Version 2.0.
+  Its icon font (SAP-icons) is covered by the same licence. "SAP-icons" is a trademark of SAP SE.
+  Accents does not use or redistribute SAP's "72" typeface.
+
+Apache ECharts (loaded at run time from https://cdn.jsdelivr.net; not included in this repository)
+  Copyright The Apache Software Foundation.
+  Licensed under the Apache License, Version 2.0.
+
+Inter typeface (included in src/accents/fonts/)
+  Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter).
+  Licensed under the SIL Open Font License, Version 1.1 (see src/accents/fonts/OFL.txt).
+  Files obtained from the @fontsource/inter package, version recorded in src/accents/fonts/VERSION.
+
+axe-core (loaded only by tools/check.mjs during checks; not part of Accents and not redistributed)
+  Copyright Deque Systems, Inc. Licensed under the Mozilla Public License 2.0.

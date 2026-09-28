@@ -1,0 +1,8 @@
+/* Accents gallery: layout for the catalogue pages only. */
+.galFacts { gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.galFact .sapMLabel { display: block; }
+.galDemo { margin-top: 0.75rem; }
+.galDemoBox { padding: 1rem; flex: 1 1 auto; width: 100%; min-width: 0; box-sizing: border-box; }
+.galNotBuilt { margin-top: 1rem; }
+.galAttribution { color: var(--sapContent_LabelColor); font-size: var(--sapFontSmallSize); max-width: 60rem; margin-top: 2rem; }
+.galLinkCard .sapFCardHeader { cursor: pointer; }

@@ -1,0 +1,27 @@
+{
+  "name": "accents-for-ui5",
+  "version": "0.1.0",
+  "description": "Build business apps with Accents for UI5, an open design framework on OpenUI5: a shell, 16 page patterns and 70 elements for planning, analytics, transactional forms, reporting and workflow, with a skill that teaches the rules and an MCP server that looks up entries, starts apps and checks them.",
+  "author": {
+    "name": "JP Galido"
+  },
+  "homepage": "https://github.com/jpgalido-txm/accents-for-ui5",
+  "repository": "https://github.com/jpgalido-txm/accents-for-ui5",
+  "license": "Apache-2.0",
+  "keywords": [
+    "openui5",
+    "ui5",
+    "design-system",
+    "business-apps",
+    "accessibility",
+    "i18n"
+  ],
+  "mcpServers": {
+    "accents": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/mcp/server.mjs"
+      ]
+    }
+  }
+}
