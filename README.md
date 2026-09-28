@@ -64,6 +64,13 @@ Accents needs only the libraries that ship with OpenUI5: `sap.m`, `sap.f`, `sap.
 Read [docs/building-elements.md](docs/building-elements.md). Every element follows one contract and
 twenty-one rules, and must pass `node tools/check.mjs <key>` before it is merged.
 
+## What leaves your computer
+
+Accents collects no data. Pages load OpenUI5 (sdk.openui5.org) and Apache ECharts (cdn.jsdelivr.net);
+the check tool also loads axe-core (cdn.jsdelivr.net). The assistant sends questions only to the model
+provider you choose in Settings. The Claude plugin's MCP server runs on your computer and sends nothing
+to anyone. Details: [PRIVACY.md](PRIVACY.md) and [SECURITY.md](SECURITY.md).
+
 ## Licence
 
 Apache License 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE). The Inter font is under the SIL Open
