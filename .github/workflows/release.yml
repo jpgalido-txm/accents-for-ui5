@@ -25,7 +25,7 @@ jobs:
           grep -q "\"version\": \"$tag\"" .claude-plugin/plugin.json
       - run: node tools/lint.mjs
       - run: node mcp/test.mjs
-      - run: npx --yes @anthropic-ai/claude-code plugin validate --strict .
+      - run: npx --yes @anthropic-ai/claude-code plugin validate .
       - name: Serve the gallery
         run: |
           python3 tools/serve.py 8811 &

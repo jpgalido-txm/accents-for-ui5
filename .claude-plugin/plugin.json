@@ -23,5 +23,10 @@
         "${CLAUDE_PLUGIN_ROOT}/mcp/server.mjs"
       ]
     }
-  }
+  },
+  "displayName": "Accents for UI5",
+  "privacyPolicyUrl": "https://github.com/jpgalido-txm/accents-for-ui5/blob/main/PRIVACY.md",
+  "supportUrl": "https://github.com/jpgalido-txm/accents-for-ui5/issues",
+  "documentationUrl": "https://github.com/jpgalido-txm/accents-for-ui5/tree/main/docs",
+  "termsOfServiceUrl": "https://github.com/jpgalido-txm/accents-for-ui5/blob/main/LICENSE"
 }

@@ -22,8 +22,10 @@ jobs:
         run: node tools/lint.mjs
       - name: MCP server
         run: node mcp/test.mjs
+      # Not --strict: plugin.json carries the Anthropic Directory's listing links (privacy, support,
+      # documentation, terms), which Claude Code reports as unknown but ignores. Errors still fail.
       - name: Plugin and marketplace manifests
-        run: npx --yes @anthropic-ai/claude-code plugin validate --strict .
+        run: npx --yes @anthropic-ai/claude-code plugin validate .
       - name: Serve the gallery
         run: |
           python3 tools/serve.py 8811 &
